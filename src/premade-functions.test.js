@@ -1,4 +1,12 @@
-import { describe, expect, it, vi } from 'vitest';
+import {
+	afterAll,
+	afterEach,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi
+} from 'vitest';
 import {
 	findLongestWord,
 	charCount,
@@ -70,16 +78,20 @@ describe(groupBy, () => {
 
 // debounce function
 
-vi.useFakeTimers();
+const mock = vi.fn(() => console.log('executed'));
 
-function testFuction() {
-    console.log('testy McTest test');
-}
+describe('delayed execution', () => {
+	beforeEach(() => {
+		vi.useFakeTimers();
+	});
+	afterEach(() => {
+		vi.restoreAllMocks();
+	});
 
-describe(debounce, () => {
-	it('should receive a function and a delay and return a debounced version of the function', () => {
+	it('should receive a function and a delay, and return a debounced version og the function', () => {
+		debounce(mock, 50000);
 
-        
-
+		vi.advanceTimersByTime(2);
+		expect(mock).not.toHaveBeenCalled();
 	});
 });
