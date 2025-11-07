@@ -6,6 +6,12 @@
  */
 export function calculateSum(a, b) {
 	// Skriv din kode her:
+
+	//Error handler, vigtig at huske error handlers
+	if (isNaN(a) || isNaN(b)) {
+		throw new Error('Both values must be numbers.');
+	}
+
 	return a + b;
 }
 
@@ -36,10 +42,12 @@ export function checkIfPrime(number) {
  */
 export function findMaximumNumber(array) {
 	// Skriv din kode her:
-	let sorted = array.sort((a, b) => a - b);
-	let maximum = sorted.pop();
+	// let sorted = array.sort((a, b) => a - b);
+	// let maximum = sorted.pop();
 
-	return maximum;
+	// return maximum;
+
+	return Math.max(...array)
 }
 
 /**
@@ -49,7 +57,17 @@ export function findMaximumNumber(array) {
  */
 export function removeDuplicateElements(array) {
 	// Skriv din kode her:
-	let removeDubs = array.filter((item, index) => array.indexOf(item) === index);
+	// let removeDubs = array.filter((item, index) => array.indexOf(item) === index);
 
-	return removeDubs;
+	// return removeDubs;
+
+	const result = [];
+
+	for (let item of array) {
+		if (!result.includes(item)) {
+			result.push(item);
+		}
+	}
+
+	return result;
 }

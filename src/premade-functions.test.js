@@ -17,9 +17,7 @@ import {
 } from './premade-functions.js';
 
 describe('findLongestWord', () => {
-	it('should recieve a string and return the longest word', () => {
-		// TODO
-		// expect(...)
+	it('should receive a string and return the longest word', () => {
 		expect(findLongestWord('Next generation testing framework')).toBe(
 			'generation'
 		);
@@ -43,6 +41,11 @@ describe('charCount', () => {
 			t: 1
 		});
 	});
+
+	//Tester på om det overhovedet er et object
+	it('should retrun an object', () => {
+		expect(charCount('Hello World')).toBeTypeOf('object');
+	});
 });
 
 // mergeSortedArrays function
@@ -58,6 +61,11 @@ describe('mergeSortedArrays', () => {
 // flattenArray function
 
 describe(flattenArray, () => {
+	//Tester på om det overhovedet er et array
+	it('should retrun an object', () => {
+		expect(flattenArray([1, 2, 3, [4], 5])).toBeTypeOf('object');
+	});
+
 	it('should receive a nested array and return a flat array', () => {
 		expect(flattenArray([1, 2, 3, [4, 5, 6]])).toStrictEqual([
 			1, 2, 3, 4, 5, 6
@@ -92,6 +100,30 @@ describe('delayed execution', () => {
 		debounce(mock, 50000);
 
 		vi.advanceTimersByTime(2);
-		expect(mock).not.toHaveBeenCalled();
+		expect(mock).not.toHaveBeenCalled(); //vi forventer ikke at den er blevet kaldt før tiden er gået
 	});
+});
+
+//Davids løsning:
+
+describe('delayed execution', () => {
+	let mock;
+	let debounced;
+
+	beforeEach(() => {
+		vi.useFakeTimers()
+		mock = vi.fn(() => '2 sekunder efter')
+		debounced = debounce(mock, 2000)
+	})
+
+	afterEach(() => {
+		vi.useRealTimers();
+		vi.clearAllMocks();
+	})
+
+	it('should receive a function and a delay, and return a debounced version og the function', () => {
+		debounce(mock, 50000);
+		expect(mock).not.toHaveBeenCalled();
+	})
+	
 });
