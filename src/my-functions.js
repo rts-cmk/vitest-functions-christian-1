@@ -5,10 +5,14 @@
  * @returns {number} Summen af de to tal.
  */
 export function calculateSum(a, b) {
-    // Skriv din kode her:
+	// Skriv din kode her:
 
+	//Error handler, vigtig at huske error handlers
+	if (isNaN(a) || isNaN(b)) {
+		throw new Error('Both values must be numbers.');
+	}
 
-
+	return a + b;
 }
 
 /**
@@ -17,10 +21,18 @@ export function calculateSum(a, b) {
  * @returns {boolean} True hvis tallet er et primtal, ellers false.
  */
 export function checkIfPrime(number) {
-    // Skriv din kode her:
+	// Skriv din kode her:
 
+	if (number <= 1) {
+		return false;
+	}
 
-
+	for (let i = 2; i < number; i++) {
+		if (number % i === 0) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
@@ -29,10 +41,13 @@ export function checkIfPrime(number) {
  * @returns {number} Det største tal i listen.
  */
 export function findMaximumNumber(array) {
-    // Skriv din kode her:
+	// Skriv din kode her:
+	// let sorted = array.sort((a, b) => a - b);
+	// let maximum = sorted.pop();
 
+	// return maximum;
 
-
+	return Math.max(...array)
 }
 
 /**
@@ -41,8 +56,18 @@ export function findMaximumNumber(array) {
  * @returns {any[]} Listen uden dubletter.
  */
 export function removeDuplicateElements(array) {
-    // Skriv din kode her:
+	// Skriv din kode her:
+	// let removeDubs = array.filter((item, index) => array.indexOf(item) === index);
 
+	// return removeDubs;
 
+	const result = [];
 
+	for (let item of array) {
+		if (!result.includes(item)) {
+			result.push(item);
+		}
+	}
+
+	return result;
 }
